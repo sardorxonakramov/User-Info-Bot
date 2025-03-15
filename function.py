@@ -9,7 +9,8 @@ async def echo(message: Message, bot: Bot):
 async def get_user_info(message: Message, bot: Bot):
     """Foydalanuvchi haqida ma'lumot olish"""
     user = await bot.get_chat(chat_id=message.from_user.id)
-
+    user_photo = await message.from_user.get_profile_photos()
+    
     bio = user.bio or "Ma'lumot yo'q"
     first_name = user.first_name if user.first_name else "Benom"
     last_name = user.last_name or "Familya kiritilmagan"
@@ -48,5 +49,10 @@ async def get_user_info(message: Message, bot: Bot):
         f"📅 <b>Created:</b> {created}\n"
         f"━━━━━━━━━━━━━━━━━━━"
     )
-
-    await bot.send_message(chat_id=message.chat.id, text=xabar, parse_mode="HTML")
+    if user_photo:
+        try :
+            await message.answer_photo(photo=user_photo.photos[0][-1].file_id, caption=xabar, parse_mode="HTML")
+        except IndexError:
+            await bot.send_message(chat_id=message.chat.id, text=xabar, parse_mode="HTML")
+    else:
+        await bot.send_message(chat_id=message.chat.id, text=xabar, parse_mode="HTML")
