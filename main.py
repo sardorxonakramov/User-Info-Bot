@@ -2,7 +2,14 @@ from aiogram import Bot, Dispatcher, filters
 from asyncio import run
 from environs import Env
 
-from function import echo, get_user_info, help_answer
+from function import (
+    echo,
+    get_user_info,
+    help_answer,
+    start_answer,
+    menu_answer,
+    stop_answer,
+)
 from menu import set_my_commands
 
 env = Env()
@@ -29,6 +36,9 @@ async def start():
     dp.startup.register(startup_answer)
     dp.message.register(get_user_info, filters.Command("info"))
     dp.message.register(help_answer, filters.Command("help"))
+    dp.message.register(start_answer, filters.Command("start"))
+    dp.message.register(menu_answer, filters.Command("menu"))
+    dp.message.register(stop_answer, filters.Command("stop"))
     await set_my_commands(bot)
     dp.message.register(echo)
     await dp.start_polling(bot, polling_timeout=0)

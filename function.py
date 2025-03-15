@@ -1,6 +1,7 @@
 from aiogram.types import Message
 from aiogram import Bot
 
+
 async def echo(message: Message, bot: Bot):
     """Foydalanuvchi yuborgan xabarni qayta yuborish"""
     await bot.send_message(chat_id=message.chat.id, text=message.text)
@@ -17,15 +18,20 @@ async def get_user_info(message: Message, bot: Bot):
     username = user.username
     ids = user.id
     created = getattr(user, "created_at", "Ma'lumot yo'q")
-    # Tug‘ilgan sanani formatlash
+
     # Tug‘ilgan sanani formatlash
     birth_date = getattr(user, "birthdate", None)
     if birth_date:
-        if hasattr(birth_date, "day") and hasattr(birth_date, "month") and hasattr(birth_date, "year"):
+        if (
+            hasattr(birth_date, "day")
+            and hasattr(birth_date, "month")
+            and hasattr(birth_date, "year")
+        ):
             birth_date = f"{birth_date.day:02}.{birth_date.month:02}.{birth_date.year}"
         elif isinstance(birth_date, str):  # Agar string bo‘lsa
             try:
                 from datetime import datetime
+
                 birth_date = datetime.fromisoformat(birth_date).strftime("%d.%m.%Y")
             except ValueError:
                 birth_date = "Ma'lumot yo'q"
@@ -50,12 +56,17 @@ async def get_user_info(message: Message, bot: Bot):
         f"━━━━━━━━━━━━━━━━━━━"
     )
     if user_photo:
-        try :
-            await message.answer_photo(photo=user_photo.photos[0][-1].file_id, caption=xabar, parse_mode="HTML")
+        try:
+            await message.answer_photo(
+                photo=user_photo.photos[0][-1].file_id, caption=xabar, parse_mode="HTML"
+            )
         except IndexError:
-            await bot.send_message(chat_id=message.chat.id, text=xabar, parse_mode="HTML")
+            await bot.send_message(
+                chat_id=message.chat.id, text=xabar, parse_mode="HTML"
+            )
     else:
         await bot.send_message(chat_id=message.chat.id, text=xabar, parse_mode="HTML")
+
 
 async def help_answer(message: Message, bot: Bot):
     """Yordam"""
@@ -73,3 +84,29 @@ async def help_answer(message: Message, bot: Bot):
         "━━━━━━━━━━━━━━━━━━━"
     )
     await bot.send_message(chat_id=message.chat.id, text=xabar, parse_mode="HTML")
+
+
+async def menu_answer(message: Message, bot: Bot):
+    """Menu"""
+    xabar = (
+        "📌 <b>Menu</b>\n"
+        "━━━━━━━━━━━━━━━━━━━\n"
+        "📝 <b>Botni ishga tushurish:</b> /start\n"
+        "📝 <b>Yordam:</b> /help\n "
+        "📝 <b>User ma'lumot olish:</b> /info\n"
+        "📝 <b>Menu:</b> /menu\n"
+        "━━━━━━━━━━━━━━━━━━━"
+    )
+    await bot.send_message(chat_id=message.chat.id, text=xabar, parse_mode="HTML")
+
+
+async def start_answer(message: Message, bot: Bot):
+    """Botni ishga tushirish"""
+    xabar = "Bot ishga tushdi"
+    await bot.send_message(chat_id=message.chat.id, text=xabar)
+
+
+async def stop_answer(message: Message, bot: Bot):
+    """Botni to'xtatish"""
+    xabar = "Bot ishdan to'xtadi"
+    await bot.send_message(chat_id=message.chat.id, text=xabar)

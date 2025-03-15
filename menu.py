@@ -8,5 +8,6 @@ async def set_my_commands(bot: Bot):
         BotCommand(command="/help", description="Yordam"),
         BotCommand(command="/info", description="Foydalanuvchi haqida ma'lumot"),
         BotCommand(command="/menu", description="Menu"),
+        BotCommand(command="/stop", description="Botni to'xtatish"),
     ]
     await bot.set_my_commands(commands)
