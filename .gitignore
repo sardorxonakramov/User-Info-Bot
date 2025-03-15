@@ -1,2 +1,31 @@
-.venv
+# Python
+*.pyc
+*.pyo
+*.pyd
+__pycache__/
+
+# Virtual Environment
+venv/
 .env
+.venv/
+
+# Django
+*.log
+db.sqlite3
+/media/
+/static/
+
+# IDE
+.vscode/
+.idea/
+*.iml
+
+# MacOS
+.DS_Store
+
+# Heroku
+*.log
+*.pid
+
+# Git
+.gitignore
