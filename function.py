@@ -56,3 +56,20 @@ async def get_user_info(message: Message, bot: Bot):
             await bot.send_message(chat_id=message.chat.id, text=xabar, parse_mode="HTML")
     else:
         await bot.send_message(chat_id=message.chat.id, text=xabar, parse_mode="HTML")
+
+async def help_answer(message: Message, bot: Bot):
+    """Yordam"""
+    xabar = (
+        "📌 <b>Yordam</b>\n"
+        "━━━━━━━━━━━━━━━━━━━\n"
+        "📝 <b>Bot haqida:</b>\n"
+        "Botdan foydalanish uchun /start ni bosing\n"
+        "📝 <b>Ma'lumot olish:</b>\n"
+        "Foydalanuvchi haqida ma'lumot olish uchun /info ni bosing\n"
+        "📝 <b>Yordam:</b>\n"
+        "Yordam olish uchun /help ni bosing\n"
+        "📝 <b>Menu:</b>\n"
+        "Menu ni ko'rish uchun /menu ni bosing\n"
+        "━━━━━━━━━━━━━━━━━━━"
+    )
+    await bot.send_message(chat_id=message.chat.id, text=xabar, parse_mode="HTML")
