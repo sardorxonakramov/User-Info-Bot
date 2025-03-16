@@ -1,9 +1,10 @@
 from aiogram import Bot, Dispatcher, filters
 from asyncio import run
 from environs import Env
-
+from aiogram.fsm.storage.memory import MemoryStorage
+import ariza
+from states import ArizaState
 from function import (
-    echo,
     get_user_info,
     help_answer,
     start_answer,
@@ -14,7 +15,8 @@ from menu import set_my_commands
 
 env = Env()
 env.read_env()
-dp = Dispatcher()
+storage = MemoryStorage()
+dp = Dispatcher(storage=storage)
 Token = env.str("TOKEN")
 
 
@@ -32,6 +34,10 @@ async def start():
     """Botni ishga tushirish"""
     """Har bir botni ishga tushurish uchun register qilish kerak"""
     bot = Bot(token=Token)
+
+    await set_my_commands(bot)
+
+
     dp.shutdown.register(shutdown_answer)
     dp.startup.register(startup_answer)
     dp.message.register(get_user_info, filters.Command("info"))
@@ -39,8 +45,23 @@ async def start():
     dp.message.register(start_answer, filters.Command("start"))
     dp.message.register(menu_answer, filters.Command("menu"))
     dp.message.register(stop_answer, filters.Command("stop"))
-    await set_my_commands(bot)
-    dp.message.register(echo)
+    dp.message.register(ariza.apllication_start, filters.Command("application"))
+    
+    # Har bir state uchun mos handlerlarni ro‘yxatdan o‘tkazish
+    dp.message.register(ariza.set_get_first_name, ArizaState.first_name)
+    dp.message.register(ariza.set_get_last_name, ArizaState.last_name)
+    dp.message.register(ariza.set_get_age, ArizaState.age)
+    dp.message.register(ariza.set_get_phone, ArizaState.phone)
+    dp.message.register(ariza.set_get_position, ArizaState.position)
+    dp.message.register(ariza.set_get_goal, ArizaState.goal)
+    dp.message.register(ariza.set_get_description, ArizaState.description)
+    dp.message.register(ariza.set_get_verify, ArizaState.verify)
+
+    # Stop commandni ham qo‘shish
+    dp.message.register(ariza.stop_command_answer_state, filters.Command("cancel"))
+
+    # dp.message.register(echo)
+
     await dp.start_polling(bot, polling_timeout=0)
     # polling_timeout bu botga jevob yozililekkanda kutish vaqti
 
