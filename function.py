@@ -11,13 +11,15 @@ async def get_user_info(message: Message, bot: Bot):
     """Foydalanuvchi haqida ma'lumot olish"""
     user = await bot.get_chat(chat_id=message.from_user.id)
     user_photo = await message.from_user.get_profile_photos()
-    
+
     bio = user.bio or "Ma'lumot yo'q"
     first_name = user.first_name if user.first_name else "Benom"
     last_name = user.last_name or "Familya kiritilmagan"
     username = user.username
     ids = user.id
     created = getattr(user, "created_at", "Ma'lumot yo'q")
+    location = user.location
+    language_code = getattr(user, "language_code", "english")
 
     # Tug‘ilgan sanani formatlash
     birth_date = getattr(user, "birthdate", None)
@@ -46,13 +48,15 @@ async def get_user_info(message: Message, bot: Bot):
         f"<b>📌 User haqida ma'lumotlar</b>\n"
         f"━━━━━━━━━━━━━━━━━━━\n"
         f"🕴️ <b>Ism:</b> {first_name}\n"
-        f"🕴️ <b>Familiya:</b> {last_name}\n"
+        f"🧑🏻‍🦽‍➡️ <b>Familiya:</b> {last_name}\n"
         f"🎉 <b>Tug‘ilgan sana:</b> {birth_date}\n"
         f"🤵 <b>Username:</b> {('@' + username) if username else '-'}\n"
         f"📝 <b>Bio:</b> {bio}\n"
         f"🆔 <b>ID:</b> <code>{ids}</code>\n"
         # f"🤖 <b>Bot:</b> {isbot}\n"
         f"📅 <b>Created:</b> {created}\n"
+        f"📍 <b>Location:</b> {location}\n"
+        f"🌐 <b>Language:</b> {language_code}\n"
         f"━━━━━━━━━━━━━━━━━━━"
     )
     if user_photo:
@@ -92,7 +96,7 @@ async def menu_answer(message: Message, bot: Bot):
         "📌 <b>Menu</b>\n"
         "━━━━━━━━━━━━━━━━━━━\n"
         "📝 <b>Botni ishga tushurish:</b> /start\n"
-        "📝 <b>Yordam:</b> /help\n "
+        "📝 <b>Yordam:</b> /help\n"
         "📝 <b>User ma'lumot olish:</b> /info\n"
         "📝 <b>Menu:</b> /menu\n"
         "━━━━━━━━━━━━━━━━━━━"
