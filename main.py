@@ -1,16 +1,11 @@
-from aiogram import Bot, Dispatcher, filters
+from aiogram import F, Bot, Dispatcher, filters
 from asyncio import run
 from environs import Env
 from aiogram.fsm.storage.memory import MemoryStorage
 import ariza
 from states import ArizaState
-from function import (
-    get_user_info,
-    help_answer,
-    start_answer,
-    menu_answer,
-    stop_answer,
-)
+import function
+
 from menu import set_my_commands
 
 env = Env()
@@ -37,16 +32,15 @@ async def start():
 
     await set_my_commands(bot)
 
-
     dp.shutdown.register(shutdown_answer)
     dp.startup.register(startup_answer)
-    dp.message.register(get_user_info, filters.Command("info"))
-    dp.message.register(help_answer, filters.Command("help"))
-    dp.message.register(start_answer, filters.Command("start"))
-    dp.message.register(menu_answer, filters.Command("menu"))
-    dp.message.register(stop_answer, filters.Command("stop"))
+    dp.message.register(function.get_user_info, filters.Command("info"))
+    dp.message.register(function.help_answer, filters.Command("help"))
+    dp.message.register(function.start_answer, filters.Command("start"))
+    dp.message.register(function.menu_answer, filters.Command("menu"))
+    dp.message.register(function.stop_answer, filters.Command("stop"))
     dp.message.register(ariza.apllication_start, filters.Command("application"))
-    
+
     # Har bir state uchun mos handlerlarni ro‘yxatdan o‘tkazish
     dp.message.register(ariza.set_get_first_name, ArizaState.first_name)
     dp.message.register(ariza.set_get_last_name, ArizaState.last_name)
@@ -60,7 +54,8 @@ async def start():
     # Stop commandni ham qo‘shish
     dp.message.register(ariza.stop_command_answer_state, filters.Command("cancel"))
 
-    # dp.message.register(echo)
+    dp.message.register(function.echo, F.text=='Salom')
+    dp.message.register(function.echo, F.photo)
 
     await dp.start_polling(bot, polling_timeout=0)
     # polling_timeout bu botga jevob yozililekkanda kutish vaqti
