@@ -1,5 +1,6 @@
-from aiogram.types import Message
+from aiogram.types import Message, ReplyKeyboardRemove
 from aiogram import Bot
+import keyboards_bot
 
 
 async def echo(message: Message, bot: Bot):
@@ -96,7 +97,7 @@ async def help_answer(message: Message, bot: Bot):
         "Menu ni ko'rish uchun /menu ni bosing\n"
         "━━━━━━━━━━━━━━━━━━━"
     )
-    await bot.send_message(chat_id=message.chat.id, text=xabar, parse_mode="HTML")
+    await bot.send_message(chat_id=message.chat.id, text=xabar, parse_mode="HTML", reply_markup=keyboards_bot.keyboards)
 
 
 async def menu_answer(message: Message, bot: Bot):
@@ -124,3 +125,8 @@ async def stop_answer(message: Message, bot: Bot):
     """Botni to'xtatish"""
     xabar = "Bot ishdan to'xtadi"
     await bot.send_message(chat_id=message.chat.id, text=xabar)
+
+async def reply_keyboard_remove(message: Message, bot: Bot):
+    """ReplyKeyboardRemove"""
+    xabar = "Reply Keyboard Remove \n\n[Javob tugmalari o'chirlidi]"
+    await bot.send_message(chat_id=message.chat.id, text=xabar, reply_markup=ReplyKeyboardRemove())
