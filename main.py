@@ -5,7 +5,7 @@ from aiogram.fsm.storage.memory import MemoryStorage
 import ariza
 from states import ArizaState
 import function
-
+import filterlar
 from menu import set_my_commands
 
 env = Env()
@@ -54,8 +54,9 @@ async def start():
     # Stop commandni ham qo‘shish
     dp.message.register(ariza.stop_command_answer_state, filters.Command("cancel"))
 
-    dp.message.register(function.echo, F.text=='Salom')
-    dp.message.register(function.echo, F.photo)
+    # dp.message.register(function.echo, F.text=='Salom')
+    # dp.message.register(function.echo, F.photo)
+    dp.message.register(function.echo, filterlar.is_text_in_message(["Salom",'alik','nima','gap']) )
 
     await dp.start_polling(bot, polling_timeout=0)
     # polling_timeout bu botga jevob yozililekkanda kutish vaqti
