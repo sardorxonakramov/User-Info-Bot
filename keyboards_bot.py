@@ -1,11 +1,16 @@
-from aiogram.types import KeyboardButton, ReplyKeyboardMarkup,ReplyKeyboardRemove
+from aiogram.types import KeyboardButton, ReplyKeyboardMarkup, ReplyKeyboardRemove
 
 keyboards = ReplyKeyboardMarkup(
     keyboard=[
         [
-            KeyboardButton(text="📝 Ariza berish"),
-            KeyboardButton(text="📋 Arizalarim",),
-            KeyboardButton(text="Javob",description="Javob berish"),
+            KeyboardButton(
+                text="📝 Refaral link",
+                description="Do'stingizni taklif qilish uchun havola",
+            ),
+            KeyboardButton(
+                text="📋 Achkolar", description="TAklif qilingan do'stlaringiz soni"
+            ),
+            KeyboardButton(text="Javob", description="Javob berish"),
         ],
         [
             KeyboardButton(text="📞 Aloqa"),
@@ -17,4 +22,3 @@ keyboards = ReplyKeyboardMarkup(
     one_time_keyboard=False,
     input_field_placeholder="Menyuni tanlang",
 )
-
