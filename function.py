@@ -112,7 +112,7 @@ async def menu_answer(message: Message, bot: Bot):
         "📝 <b>Menu:</b> /menu\n"
         "━━━━━━━━━━━━━━━━━━━"
     )
-    await bot.send_message(chat_id=message.chat.id, text=xabar, parse_mode="HTML")
+    await bot.send_message(chat_id=message.chat.id, text=xabar, parse_mode="HTML", reply_markup=keyboards_bot.keyboards)
 
 
 async def start_answer(message: Message, bot: Bot):

@@ -1,16 +1,12 @@
-from aiogram.types import KeyboardButton, ReplyKeyboardMarkup, ReplyKeyboardRemove
+from aiogram.types import KeyboardButton, ReplyKeyboardMarkup
 
+# Asosiy menyu klaviaturasi
 keyboards = ReplyKeyboardMarkup(
     keyboard=[
         [
-            KeyboardButton(
-                text="📝 Refaral link",
-                description="Do'stingizni taklif qilish uchun havola",
-            ),
-            KeyboardButton(
-                text="📋 Achkolar", description="TAklif qilingan do'stlaringiz soni"
-            ),
-            KeyboardButton(text="Javob", description="Javob berish"),
+            KeyboardButton(text="📝 Referal link"),
+            KeyboardButton(text="📋 Achkolar"),
+            KeyboardButton(text="Javob"),
         ],
         [
             KeyboardButton(text="📞 Aloqa"),
@@ -19,6 +15,6 @@ keyboards = ReplyKeyboardMarkup(
     ],
     resize_keyboard=True,
     is_persistent=True,
-    one_time_keyboard=False,
+    one_time_keyboard=True,
     input_field_placeholder="Menyuni tanlang",
 )
