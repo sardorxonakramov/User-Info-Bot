@@ -57,6 +57,8 @@ async def start():
     # Stop commandni ham qo‘shish
     dp.message.register(ariza.stop_command_answer_state, filters.Command("cancel"))
 
+    dp.message.register(function.reply_contact_info, F.text == "📞 Aloqa")
+
     # Filterlar bilan ishlash
     dp.message.register(
         function.echo, filterlar.is_text_in_message(["Salom", "alik", "nima", "gap"])

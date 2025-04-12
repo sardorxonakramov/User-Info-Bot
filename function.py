@@ -130,3 +130,7 @@ async def reply_keyboard_remove(message: Message, bot: Bot):
     """ReplyKeyboardRemove"""
     xabar = "Reply Keyboard Remove \n\n[Javob tugmalari o'chirlidi]"
     await bot.send_message(chat_id=message.chat.id, text=xabar, reply_markup=ReplyKeyboardRemove())
+
+async def reply_contact_info(message: Message, bot: Bot):
+  
+    await bot.send_message(chat_id=message.chat.id, text=keyboards_bot.contact_keyboard.input_field_placeholder, parse_mode="HTML", reply_markup=keyboards_bot.contact_keyboard)
