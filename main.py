@@ -36,8 +36,8 @@ async def start():
 
     dp.shutdown.register(shutdown_answer)
     dp.startup.register(startup_answer)
-    dp.message.register(function.reply_keyboard_remove, F.text=='Cancel')
-    dp.message.register(function.get_user_info, filters.Command("info")) 
+    dp.message.register(function.reply_keyboard_remove, F.text == "Cancel")
+    dp.message.register(function.get_user_info, filters.Command("info"))
     dp.message.register(function.help_answer, filters.Command("help"))
     dp.message.register(function.start_answer, filters.Command("start"))
     dp.message.register(function.menu_answer, filters.Command("menu"))
@@ -62,7 +62,6 @@ async def start():
         function.echo, filterlar.is_text_in_message(["Salom", "alik", "nima", "gap"])
     )
     referal.register_handlers(dp)
-
 
     await dp.start_polling(bot, polling_timeout=0)
     # polling_timeout bu botga jevob yozililekkanda kutish vaqti

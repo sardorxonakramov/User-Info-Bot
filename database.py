@@ -1,5 +1,7 @@
 import sqlite3
+from aiogram.enums import ContentType
 
+ContentType.STICKER
 # Ma'lumotlar bazasiga ulanish
 conn = sqlite3.connect("bot_database.db")
 cursor = conn.cursor()
