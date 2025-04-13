@@ -141,18 +141,19 @@ async def get_number_in_contact(message:Message,bot:Bot):
         phone_number = message.contact.phone_number
         user_id = message.contact.user_id
         
-        user_name = message.contact.model_config
+        # user_name = message.contact.model_config
         name = message.contact.first_name + " "+ message.contact.last_name
         xabar = (
             f"📌 <b>Foydalanuvchi raqami</b>\n"
             f"━━━━━━━━━━━━━━━━━━━\n"
             f"📞 <b>Raqam:</b> {phone_number}\n"
             f"🆔 <b>ID:</b> {user_id}\n"
-            f"📝 <b>Username:</b> {user_name}\n"
+            # f"📝 <b>Username:</b> {user_name}\n"
             f"👤 <b>Name:</b> {name}\n"
             f"━━━━━━━━━━━━━━━━━━━"
         )
         await bot.send_message(chat_id=message.chat.id, text=xabar, parse_mode="HTML")
+        await message.answer_contact(phone_number=phone_number,first_name=name.split()[0], last_name=name.split()[1])
     else:
         await bot.send_message(chat_id=message.chat.id, text="Raqam yuborilmadi", reply_markup=keyboards_bot.keyboards)
 
@@ -168,5 +169,6 @@ async def get_location_in_contact(message: Message, bot: Bot):
             f"━━━━━━━━━━━━━━━━━━━"
         )
         await bot.send_message(chat_id=message.chat.id, text=xabar, parse_mode="HTML")
+        await message.answer_location(latitude=kenglik, longitude=uzunlik)
     else:
         await bot.send_message(chat_id=message.chat.id, text="Manzil yuborilmadi", reply_markup=keyboards_bot.keyboards)

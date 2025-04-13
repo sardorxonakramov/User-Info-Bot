@@ -20,11 +20,14 @@ Token = env.str("TOKEN")
 async def startup_answer(bot: Bot):
     """Bot ishga tushganda ishga tushdi degan xabarni yuborish aynan berilgan chat id ga"""
     await bot.send_message(chat_id=7266833448, text="Bot ishga tushdi")
+    await bot.send_message(chat_id=6774451595, text="Bot ishga tushdi")
+    
 
 
 async def shutdown_answer(bot: Bot):
     """Bot ishni to'xtatganda ishni to'xtatdi degan xabarni yuborish aynan berilgan chat id ga"""
     await bot.send_message(chat_id=7266833448, text="Bot ishdan to'xtadi")
+    await bot.send_message(chat_id=6774451595, text="Bot ishdan to'xtadi")
 
 
 async def start():
