@@ -1,4 +1,4 @@
-"""Asosoiy file dastur ishlashi uchun """
+"""Asosoiy file dastur ishlashi uchun"""
 
 from aiogram import F, Bot, Dispatcher, filters
 from asyncio import run
@@ -71,9 +71,7 @@ async def start():
     dp.message.register(function.get_location_in_contact, F.location)
 
     # Filterlar bilan ishlash
-    dp.message.register(
-        function.echo, filterlar.is_text_in_message(["Salom", "alik", "nima", "gap"])
-    )
+    dp.message.register(function.echo)
     referal.register_handlers(dp)
 
     await dp.start_polling(bot, polling_timeout=0)
