@@ -172,3 +172,11 @@ async def get_location_in_contact(message: Message, bot: Bot):
         await message.answer_location(latitude=kenglik, longitude=uzunlik)
     else:
         await bot.send_message(chat_id=message.chat.id, text="Manzil yuborilmadi", reply_markup=keyboards_bot.keyboards)
+
+async def majburiy_obuna(message: Message, bot: Bot):
+    """Foydalanuvchini kanalga obuna qilish"""
+    link = '@myjobs1'
+    await message.answer(
+        f"Botdan foydalanish uchun kanalga obuna bo'lishingiz kerak.\n kanal {link} ",
+    
+    )

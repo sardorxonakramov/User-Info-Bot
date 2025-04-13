@@ -12,9 +12,11 @@ import referal
 
 env = Env()
 env.read_env()
+
 storage = MemoryStorage()
 dp = Dispatcher(storage=storage)
 Token = env.str("TOKEN")
+# CHANNEL_ID = env.str("CHANNEL_ID")
 
 
 async def startup_answer(bot: Bot):
@@ -36,6 +38,8 @@ async def start():
     bot = Bot(token=Token)
 
     await set_my_commands(bot)
+    # Keyboardlarni ro‘yxatdan o‘tkazish
+    dp.message.register(function.majburiy_obuna, filterlar.is_subscribe_in_my_channel())
 
     dp.shutdown.register(shutdown_answer)
     dp.startup.register(startup_answer)
