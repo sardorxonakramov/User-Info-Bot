@@ -134,3 +134,39 @@ async def reply_keyboard_remove(message: Message, bot: Bot):
 async def reply_contact_info(message: Message, bot: Bot):
   
     await bot.send_message(chat_id=message.chat.id, text=keyboards_bot.contact_keyboard.input_field_placeholder, parse_mode="HTML", reply_markup=keyboards_bot.contact_keyboard)
+
+async def get_number_in_contact(message:Message,bot:Bot):
+    """Foydalanuvchi telefon raqamini yuboradi"""
+    if message.contact:
+        phone_number = message.contact.phone_number
+        user_id = message.contact.user_id
+        
+        user_name = message.contact.model_config
+        name = message.contact.first_name + " "+ message.contact.last_name
+        xabar = (
+            f"📌 <b>Foydalanuvchi raqami</b>\n"
+            f"━━━━━━━━━━━━━━━━━━━\n"
+            f"📞 <b>Raqam:</b> {phone_number}\n"
+            f"🆔 <b>ID:</b> {user_id}\n"
+            f"📝 <b>Username:</b> {user_name}\n"
+            f"👤 <b>Name:</b> {name}\n"
+            f"━━━━━━━━━━━━━━━━━━━"
+        )
+        await bot.send_message(chat_id=message.chat.id, text=xabar, parse_mode="HTML")
+    else:
+        await bot.send_message(chat_id=message.chat.id, text="Raqam yuborilmadi", reply_markup=keyboards_bot.keyboards)
+
+async def get_location_in_contact(message: Message, bot: Bot):
+    """Foydalanuvchi manzilini yuboradi"""
+    if message.location:
+        kenglik = message.location.latitude
+        uzunlik = message.location.longitude
+        xabar = (
+            f"📌 <b>Foydalanuvchi manzili</b>\n"
+            f"━━━━━━━━━━━━━━━━━━━\n"
+            f"📍 <b>Manzil:</b> {kenglik}, {uzunlik}\n"
+            f"━━━━━━━━━━━━━━━━━━━"
+        )
+        await bot.send_message(chat_id=message.chat.id, text=xabar, parse_mode="HTML")
+    else:
+        await bot.send_message(chat_id=message.chat.id, text="Manzil yuborilmadi", reply_markup=keyboards_bot.keyboards)
