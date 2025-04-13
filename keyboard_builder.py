@@ -1,4 +1,5 @@
 # from aiogram.utils import ReplyKeyboardBuilder
+# bu knopklar ishlamepti chunki bu funksiyaga qo'shilgani yo'q
 from aiogram.utils.keyboard import ReplyKeyboardBuilder
 from aiogram.types import KeyboardButton
 
@@ -28,5 +29,8 @@ builder2 = builder.copy()
 builder2.add(KeyboardButton(text="Bu knopkani bosma"))
 
 # ikkinchi builderni builderga birlashtirib yuboruvchi metod
-
+# bu knopkalarni birlashtirib yuboruvchi metod attach
+builder.attach(builder2)
+builder.from_markup()
+builder.as_markup()
 
