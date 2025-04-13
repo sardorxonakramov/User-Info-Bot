@@ -1,3 +1,5 @@
+"""ReplyKeybordMurkupda knopklar yartilgan file"""
+
 from aiogram.types import KeyboardButton, ReplyKeyboardMarkup
 
 # Asosiy menyu klaviaturasi

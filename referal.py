@@ -1,3 +1,5 @@
+"""Refrerallikka tekshirib link hosil qilish uchun kodlar"""
+
 from aiogram import F, Bot, Dispatcher
 from aiogram.types import Message
 from aiogram.utils.deep_linking import create_start_link

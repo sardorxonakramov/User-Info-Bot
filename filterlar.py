@@ -1,3 +1,5 @@
+"""Men yaratgan barcha filterlar"""
+
 from aiogram.filters import Filter
 from aiogram.types import Message
 from aiogram.utils.deep_linking import create_start_link
@@ -18,4 +20,4 @@ class is_subscribe_in_my_channel(Filter):
             return False
         else:
             await message.answer("Botdan foydalanish uchun kanalga obuna bo'lishingiz kerak.")
-            return True
+            return False

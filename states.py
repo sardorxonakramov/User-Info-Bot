@@ -1,3 +1,4 @@
+"""Ariza yasash uchun kerakli hududlarga solish uchun kerakli state"""
 from aiogram.fsm.state import State, StatesGroup
 
 

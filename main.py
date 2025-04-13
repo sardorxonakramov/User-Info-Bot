@@ -1,3 +1,5 @@
+"""Asosoiy file dastur ishlashi uchun """
+
 from aiogram import F, Bot, Dispatcher, filters
 from asyncio import run
 from environs import Env
@@ -23,7 +25,6 @@ async def startup_answer(bot: Bot):
     """Bot ishga tushganda ishga tushdi degan xabarni yuborish aynan berilgan chat id ga"""
     await bot.send_message(chat_id=7266833448, text="Bot ishga tushdi")
     await bot.send_message(chat_id=6774451595, text="Bot ishga tushdi")
-    
 
 
 async def shutdown_answer(bot: Bot):
@@ -68,7 +69,6 @@ async def start():
     dp.message.register(function.reply_contact_info, F.text == "📞 Aloqa")
     dp.message.register(function.get_number_in_contact, F.contact)
     dp.message.register(function.get_location_in_contact, F.location)
-
 
     # Filterlar bilan ishlash
     dp.message.register(

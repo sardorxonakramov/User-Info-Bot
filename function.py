@@ -1,3 +1,5 @@
+"""Men yasagan funksiyalar"""
+
 from aiogram.types import Message, ReplyKeyboardRemove
 from aiogram import Bot
 import keyboards_bot

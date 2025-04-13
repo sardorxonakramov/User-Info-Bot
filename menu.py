@@ -1,3 +1,5 @@
+""" Botda menyu yaratish uchun kerakli commandlar  """
+
 from aiogram.types import BotCommand
 from aiogram import Bot, Dispatcher, types, html
 

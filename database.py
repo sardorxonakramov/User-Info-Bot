@@ -1,3 +1,4 @@
+"""Foydalanuvchilarni saqlash uchun data base sozlash"""
 import sqlite3
 from aiogram.enums import ContentType
 

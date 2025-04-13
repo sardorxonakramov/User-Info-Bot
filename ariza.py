@@ -1,3 +1,5 @@
+'''Ariz yozilayotganda foydalanuvchidan ma'lumotlarni olish uchun kerakli funksiyalar'''
+
 from aiogram import types, Bot
 from aiogram.fsm.context import FSMContext
 from states import ArizaState
