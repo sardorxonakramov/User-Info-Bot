@@ -9,7 +9,7 @@ from states import ArizaState
 import function
 import filterlar
 from menu import set_my_commands
-import database
+import callback_function
 import referal
 
 env = Env()
@@ -73,6 +73,9 @@ async def start():
     # Filterlar bilan ishlash
     dp.message.register(function.echo)
     referal.register_handlers(dp)
+
+    # callback functionlar
+    dp.callback_query.register(callback_function.delete_callback, F.data.lower() == "delete")
 
     await dp.start_polling(bot, polling_timeout=0)
     # polling_timeout bu botga jevob yozililekkanda kutish vaqti
