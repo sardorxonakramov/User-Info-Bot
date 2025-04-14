@@ -75,7 +75,9 @@ async def start():
     referal.register_handlers(dp)
 
     # callback functionlar
-    dp.callback_query.register(callback_function.delete_callback, F.data.lower() == "delete")
+    dp.callback_query.register(
+        callback_function.delete_callback, F.data.lower() == "delete"
+    )
 
     await dp.start_polling(bot, polling_timeout=0)
     # polling_timeout bu botga jevob yozililekkanda kutish vaqti
